@@ -3,7 +3,7 @@ import uuid
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from PIL import Image
 from rembg import remove
-from bg_remover import BACKGROUND_COLORS, create_gradient
+from bg_remover import BACKGROUND_COLORS, createGradient
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'input'
@@ -52,7 +52,7 @@ def uploadFile():
             
             if 'gradient' in backgroundSelection:
                 # Gradient background
-                gradientBg = create_gradient(outputImage.size, backgroundSelection['gradient'])
+                gradientBg = createGradient(outputImage.size, backgroundSelection['gradient'])
                 if gradientBg:
                     # Convert gradient to RGBA
                     gradientRgba = gradientBg.convert('RGBA')
@@ -89,4 +89,5 @@ def outputFile(filename):
     return send_from_directory(app.config['OUTPUT_FOLDER'], filename)
 
 if __name__ == '__main__':
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
