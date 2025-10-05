@@ -1,56 +1,73 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Arka Plan Kaldırıcı</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <h1>Arka Plan Kaldırıcı</h1>
-        <p>Resminizi yükleyin ve arka planını kaldırın!</p>
-        
-        <form action="/upload" method="post" enctype="multipart/form-data">
-            <div class="upload-container">
-                <label for="file" class="upload-label">
-                    <div class="upload-icon">📁</div>
-                    <span>Resim Seçin</span>
-                </label>
-                <input type="file" id="file" name="file" accept=".jpg,.jpeg,.png" required>
-                <div id="file-name" class="file-name">Dosya seçilmedi</div>
+      <h1>Arka Plan Kaldırıcı</h1>
+      <p>Resminizi yükleyin ve arka planını kaldırın!</p>
+
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="upload-container">
+          <label for="file" class="upload-label">
+            <div class="upload-icon">📁</div>
+            <span>Resim Seçin</span>
+          </label>
+          <input
+            type="file"
+            id="file"
+            name="file"
+            accept=".jpg,.jpeg,.png"
+            required
+          />
+          <div id="file-name" class="file-name">Dosya seçilmedi</div>
+        </div>
+
+        <div class="background-selection">
+          <h3>Arka Plan Rengi Seçin</h3>
+          <div class="color-grid">
+            {% for key, value in backgroundColors.items() %}
+            <div class="color-option">
+              <input type="radio" id="bg{{ key }}" name="background" value="{{
+              key }}" {% if key == '1' %}checked{% endif %}>
+              <label for="bg{{ key }}" class="color-label">
+                {% if 'gradient' in value %}
+                <div
+                  class="color-preview gradient-{{ value['gradient'] }}"
+                ></div>
+                {% elif 'color' in value and value['color'] is not none %}
+                <div
+                  class="color-preview"
+                  style="background-color: rgb({{ value['color'][0] }}, {{ value['color'][1] }}, {{ value['color'][2] }});"
+                ></div>
+                {% else %}
+                <div class="color-preview transparent"></div>
+                {% endif %}
+                <span>{{ value['name'] }}</span>
+              </label>
             </div>
-            
-            <div class="background-selection">
-                <h3>Arka Plan Rengi Seçin</h3>
-                <div class="color-grid">
-                    {% for key, value in background_colors.items() %}
-                    <div class="color-option">
-                        <input type="radio" id="bg{{ key }}" name="background" value="{{ key }}" {% if key == '1' %}checked{% endif %}>
-                        <label for="bg{{ key }}" class="color-label">
-                            {% if 'gradient' in value %}
-                                <div class="color-preview gradient-{{ value['gradient'] }}"></div>
-                            {% elif 'color' in value and value['color'] is not none %}
-                                <div class="color-preview" style="background-color: rgb({{ value['color'][0] }}, {{ value['color'][1] }}, {{ value['color'][2] }});"></div>
-                            {% else %}
-                                <div class="color-preview transparent"></div>
-                            {% endif %}
-                            <span>{{ value['name'] }}</span>
-                        </label>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            
-            <button type="submit" class="submit-btn">Arka Planı Kaldır</button>
-        </form>
+            {% endfor %}
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Arka Planı Kaldır</button>
+      </form>
     </div>
 
     <script>
-        document.getElementById('file').addEventListener('change', function(e) {
-            var fileName = e.target.files[0] ? e.target.files[0].name : 'Dosya seçilmedi';
-            document.getElementById('file-name').textContent = fileName;
-        });
+      document.getElementById("file").addEventListener("change", function (e) {
+        var fileName = e.target.files[0]
+          ? e.target.files[0].name
+          : "Dosya seçilmedi";
+        document.getElementById("file-name").textContent = fileName;
+      });
     </script>
-</body>
+  </body>
 </html>
