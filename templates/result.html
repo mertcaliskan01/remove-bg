@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonuç - Arka Plan Kaldırıcı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container result-container">
+        <h1>İşlem Tamamlandı!</h1>
+        
+        <div class="result-image">
+            <img src="{{ url_for('output_file', filename=filename) }}" alt="İşlenmiş Resim">
+        </div>
+        
+        <div class="action-buttons">
+            <a href="{{ url_for('download', filename=filename) }}" class="download-btn">Resmi İndir</a>
+            <a href="{{ url_for('index') }}" class="back-btn">Yeni Resim Yükle</a>
+        </div>
+    </div>
+</body>
+</html>

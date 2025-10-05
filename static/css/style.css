@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #7f8c8d;
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 2px dashed #ced4da;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+}
+
+.upload-label:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.upload-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.file-name {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.background-selection {
+    margin-bottom: 30px;
+}
+
+.background-selection h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+}
+
+.color-option {
+    position: relative;
+}
+
+.color-option input[type="radio"] {
+    display: none;
+}
+
+.color-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid #e9ecef;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.color-label:hover {
+    border-color: #adb5bd;
+}
+
+.color-option input[type="radio"]:checked + .color-label {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.color-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    border: 1px solid #dee2e6;
+}
+
+.color-preview.transparent {
+    background-image: linear-gradient(45deg, #f8f9fa 25%, transparent 25%), 
+                      linear-gradient(-45deg, #f8f9fa 25%, transparent 25%), 
+                      linear-gradient(45deg, transparent 75%, #f8f9fa 75%), 
+                      linear-gradient(-45deg, transparent 75%, #f8f9fa 75%);
+    background-size: 10px 10px;
+    background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+}
+
+/* Gradient önizlemeleri için stil */
+.gradient-cream_white {
+    background: linear-gradient(to bottom, rgb(255, 253, 240), rgb(255, 255, 255));
+}
+.gradient-white_cream {
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(255, 253, 240));
+}
+.gradient-lavender_mint {
+    background: linear-gradient(to bottom, rgb(147, 112, 219), rgb(152, 251, 152));
+}
+.gradient-mint_lavender {
+    background: linear-gradient(to bottom, rgb(152, 251, 152), rgb(147, 112, 219));
+}
+.gradient-peach_cream {
+    background: linear-gradient(to bottom, rgb(255, 160, 122), rgb(255, 253, 240));
+}
+.gradient-cream_peach {
+    background: linear-gradient(to bottom, rgb(255, 253, 240), rgb(255, 160, 122));
+}
+.gradient-lightblue_white {
+    background: linear-gradient(to bottom, rgb(100, 149, 237), rgb(255, 255, 255));
+}
+.gradient-white_lightblue {
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(100, 149, 237));
+}
+.gradient-mint_lightgreen {
+    background: linear-gradient(to bottom, rgb(152, 251, 152), rgb(34, 139, 34));
+}
+.gradient-lightgreen_mint {
+    background: linear-gradient(to bottom, rgb(34, 139, 34), rgb(152, 251, 152));
+}
+.gradient-lightpink_cream {
+    background: linear-gradient(to bottom, rgb(255, 105, 180), rgb(255, 253, 240));
+}
+.gradient-cream_lightpink {
+    background: linear-gradient(to bottom, rgb(255, 253, 240), rgb(255, 105, 180));
+}
+.gradient-salmon_cream {
+    background: linear-gradient(to bottom, rgb(220, 20, 60), rgb(255, 253, 240));
+}
+.gradient-cream_salmon {
+    background: linear-gradient(to bottom, rgb(255, 253, 240), rgb(220, 20, 60));
+}
+.gradient-lavender_white {
+    background: linear-gradient(to bottom, rgb(138, 43, 226), rgb(255, 255, 255));
+}
+.gradient-white_lavender {
+    background: linear-gradient(to bottom, rgb(255, 255, 255), rgb(138, 43, 226));
+}
+.gradient-lightyellow_cream {
+    background: linear-gradient(to bottom, rgb(255, 215, 0), rgb(255, 253, 240));
+}
+.gradient-cream_lightyellow {
+    background: linear-gradient(to bottom, rgb(255, 253, 240), rgb(255, 215, 0));
+}
+
+.color-label span {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 5px;
+    color: #495057;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0069d9;
+}
+
+/* Sonuç sayfası stilleri */
+.result-container {
+    text-align: center;
+}
+
+.result-image {
+    margin: 30px 0;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.result-image img {
+    max-width: 100%;
+    max-height: 500px;
+    border-radius: 5px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.download-btn, .back-btn {
+    padding: 12px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.download-btn {
+    background-color: #28a745;
+    color: white;
+}
+
+.download-btn:hover {
+    background-color: #218838;
+}
+
+.back-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.back-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+    
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .download-btn, .back-btn {
+        width: 100%;
+    }
+}

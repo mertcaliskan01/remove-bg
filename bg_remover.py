@@ -5,56 +5,56 @@ from rembg import remove
 INPUT_DIR = 'input'
 OUTPUT_DIR = 'output'
 
-# Arka plan renk seçenekleri
+# Background color options
 BACKGROUND_COLORS = {
-    '1': {'name': 'Beyaz', 'color': (255, 255, 255)},
-    '2': {'name': 'Siyah', 'color': (0, 0, 0)},
-    '3': {'name': 'Şeffaf', 'color': None},
-    '4': {'name': 'Açık Gri', 'color': (240, 240, 240)},
-    '5': {'name': 'Koyu Gri', 'color': (64, 64, 64)},
-    '6': {'name': 'Krem', 'color': (255, 253, 240)},
-    '7': {'name': 'Açık Krem', 'color': (255, 250, 230)},
-    '8': {'name': 'Sıcak Krem', 'color': (255, 248, 220)},
-    '9': {'name': 'Bej', 'color': (245, 245, 220)},
-    '10': {'name': 'Fildişi', 'color': (255, 255, 240)},
-    '11': {'name': 'Antik Beyaz', 'color': (250, 235, 215)},
-    '12': {'name': 'Mint Yeşili', 'color': (152, 251, 152)},
-    '13': {'name': 'Lavanta', 'color': (230, 230, 250)},
-    '14': {'name': 'Şeftali', 'color': (255, 218, 185)},
-    '15': {'name': 'Açık Mavi', 'color': (173, 216, 230)},
-    '16': {'name': 'Açık Pembe', 'color': (255, 182, 193)},
-    '17': {'name': 'Somon', 'color': (250, 128, 114)},
-    '18': {'name': 'Açık Sarı', 'color': (255, 255, 224)},
-    '19': {'name': 'Açık Turuncu', 'color': (255, 218, 185)},
-    '20': {'name': 'Açık Mor', 'color': (221, 160, 221)},
-    '21': {'name': 'Açık Yeşil', 'color': (144, 238, 144)},
-    '22': {'name': 'Açık Kahverengi', 'color': (210, 180, 140)},
-    '23': {'name': 'Gradient: Krem-Beyaz', 'gradient': 'cream_white'},
-    '24': {'name': 'Gradient: Beyaz-Krem', 'gradient': 'white_cream'},
-    '25': {'name': 'Gradient: Lavanta-Mint', 'gradient': 'lavender_mint'},
-    '26': {'name': 'Gradient: Mint-Lavanta', 'gradient': 'mint_lavender'},
-    '27': {'name': 'Gradient: Şeftali-Krem', 'gradient': 'peach_cream'},
-    '28': {'name': 'Gradient: Krem-Şeftali', 'gradient': 'cream_peach'},
-    '29': {'name': 'Gradient: Açık Mavi-Beyaz', 'gradient': 'lightblue_white'},
-    '30': {'name': 'Gradient: Beyaz-Açık Mavi', 'gradient': 'white_lightblue'},
-    '31': {'name': 'Gradient: Mint-Açık Yeşil', 'gradient': 'mint_lightgreen'},
-    '32': {'name': 'Gradient: Açık Yeşil-Mint', 'gradient': 'lightgreen_mint'},
-    '33': {'name': 'Gradient: Açık Pembe-Krem', 'gradient': 'lightpink_cream'},
-    '34': {'name': 'Gradient: Krem-Açık Pembe', 'gradient': 'cream_lightpink'},
-    '35': {'name': 'Gradient: Somon-Krem', 'gradient': 'salmon_cream'},
-    '36': {'name': 'Gradient: Krem-Somon', 'gradient': 'cream_salmon'},
-    '37': {'name': 'Gradient: Lavanta-Beyaz', 'gradient': 'lavender_white'},
-    '38': {'name': 'Gradient: Beyaz-Lavanta', 'gradient': 'white_lavender'},
-    '39': {'name': 'Gradient: Açık Sarı-Krem', 'gradient': 'lightyellow_cream'},
-    '40': {'name': 'Gradient: Krem-Açık Sarı', 'gradient': 'cream_lightyellow'}
+    '1': {'name': 'White', 'color': (255, 255, 255)},
+    '2': {'name': 'Black', 'color': (0, 0, 0)},
+    '3': {'name': 'Transparent', 'color': None},
+    '4': {'name': 'Light Gray', 'color': (240, 240, 240)},
+    '5': {'name': 'Dark Gray', 'color': (64, 64, 64)},
+    '6': {'name': 'Cream', 'color': (255, 253, 240)},
+    '7': {'name': 'Light Cream', 'color': (255, 250, 230)},
+    '8': {'name': 'Warm Cream', 'color': (255, 248, 220)},
+    '9': {'name': 'Beige', 'color': (245, 245, 220)},
+    '10': {'name': 'Ivory', 'color': (255, 255, 240)},
+    '11': {'name': 'Antique White', 'color': (250, 235, 215)},
+    '12': {'name': 'Mint Green', 'color': (152, 251, 152)},
+    '13': {'name': 'Lavender', 'color': (230, 230, 250)},
+    '14': {'name': 'Peach', 'color': (255, 218, 185)},
+    '15': {'name': 'Light Blue', 'color': (173, 216, 230)},
+    '16': {'name': 'Light Pink', 'color': (255, 182, 193)},
+    '17': {'name': 'Salmon', 'color': (250, 128, 114)},
+    '18': {'name': 'Light Yellow', 'color': (255, 255, 224)},
+    '19': {'name': 'Light Orange', 'color': (255, 218, 185)},
+    '20': {'name': 'Light Purple', 'color': (221, 160, 221)},
+    '21': {'name': 'Light Green', 'color': (144, 238, 144)},
+    '22': {'name': 'Light Brown', 'color': (210, 180, 140)},
+    '23': {'name': 'Gradient: Cream-White', 'gradient': 'cream_white'},
+    '24': {'name': 'Gradient: White-Cream', 'gradient': 'white_cream'},
+    '25': {'name': 'Gradient: Lavender-Mint', 'gradient': 'lavender_mint'},
+    '26': {'name': 'Gradient: Mint-Lavender', 'gradient': 'mint_lavender'},
+    '27': {'name': 'Gradient: Peach-Cream', 'gradient': 'peach_cream'},
+    '28': {'name': 'Gradient: Cream-Peach', 'gradient': 'cream_peach'},
+    '29': {'name': 'Gradient: Light Blue-White', 'gradient': 'lightblue_white'},
+    '30': {'name': 'Gradient: White-Light Blue', 'gradient': 'white_lightblue'},
+    '31': {'name': 'Gradient: Mint-Light Green', 'gradient': 'mint_lightgreen'},
+    '32': {'name': 'Gradient: Light Green-Mint', 'gradient': 'lightgreen_mint'},
+    '33': {'name': 'Gradient: Light Pink-Cream', 'gradient': 'lightpink_cream'},
+    '34': {'name': 'Gradient: Cream-Light Pink', 'gradient': 'cream_lightpink'},
+    '35': {'name': 'Gradient: Salmon-Cream', 'gradient': 'salmon_cream'},
+    '36': {'name': 'Gradient: Cream-Salmon', 'gradient': 'cream_salmon'},
+    '37': {'name': 'Gradient: Lavender-White', 'gradient': 'lavender_white'},
+    '38': {'name': 'Gradient: White-Lavender', 'gradient': 'white_lavender'},
+    '39': {'name': 'Gradient: Light Yellow-Cream', 'gradient': 'lightyellow_cream'},
+    '40': {'name': 'Gradient: Cream-Light Yellow', 'gradient': 'cream_lightyellow'}
 }
 
-def create_gradient(size, gradient_type):
-    """Gradient arka plan oluşturur"""
+def createGradient(size, gradientType):
+    """Creates a gradient background"""
     width, height = size
     
-    # Gradient renk tanımları - Daha belirgin geçişler
-    gradients = {
+    # Gradient color definitions - More distinct transitions
+    GRADIENTS = {
         'cream_white': [(255, 253, 240), (255, 255, 255)],
         'white_cream': [(255, 255, 255), (255, 253, 240)],
         'lavender_mint': [(147, 112, 219), (152, 251, 152)],
@@ -75,17 +75,17 @@ def create_gradient(size, gradient_type):
         'cream_lightyellow': [(255, 253, 240), (255, 215, 0)]
     }
     
-    if gradient_type not in gradients:
+    if gradientType not in GRADIENTS:
         return None
     
-    color1, color2 = gradients[gradient_type]
+    color1, color2 = GRADIENTS[gradientType]
     
-    # Gradient oluştur
-    gradient_img = Image.new('RGB', (width, height))
-    pixels = gradient_img.load()
+    # Create gradient
+    gradientImg = Image.new('RGB', (width, height))
+    pixels = gradientImg.load()
     
     for y in range(height):
-        # Y pozisyonuna göre renk karışımı
+        # Color mix based on Y position
         ratio = y / height
         r = int(color1[0] * (1 - ratio) + color2[0] * ratio)
         g = int(color1[1] * (1 - ratio) + color2[1] * ratio)
@@ -94,84 +94,84 @@ def create_gradient(size, gradient_type):
         for x in range(width):
             pixels[x, y] = (r, g, b)
     
-    return gradient_img
+    return gradientImg
 
-def get_background_color():
-    """Kullanıcıdan arka plan rengi seçmesini ister"""
-    print("\n=== Arka Plan Rengi Seçimi ===")
-    print("Lütfen arka plan rengini seçin:")
+def getBackgroundColor():
+    """Asks the user to choose a background color"""
+    print("\n=== Background Color Selection ===")
+    print("Please select a background color:")
     
     for key, value in BACKGROUND_COLORS.items():
         print(f"{key}. {value['name']}")
     
     while True:
-        choice = input("\nSeçiminizi yapın (1-40): ").strip()
+        choice = input("\nMake your selection (1-40): ").strip()
         if choice in BACKGROUND_COLORS:
             selected = BACKGROUND_COLORS[choice]
-            print(f"\nSeçilen arka plan rengi: {selected['name']}")
+            print(f"\nSelected background color: {selected['name']}")
             return selected
         else:
-            print("Geçersiz seçim! Lütfen 1-40 arasında bir sayı girin.")
+            print("Invalid selection! Please enter a number between 1-40.")
 
-# Klasörleri oluştur
+# Create folders
 os.makedirs(INPUT_DIR, exist_ok=True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# Desteklenen resim uzantıları
-image_extensions = ['.jpg', '.jpeg', '.png', '.JPG', '.PNG']
+# Supported image extensions
+imageExtensions = ['.jpg', '.jpeg', '.png', '.JPG', '.PNG']
 
 def main():
-    """Ana fonksiyon - komut satırından çalıştırıldığında çağrılır"""
+    """Main function - called when run from the command line"""
     try:
-        # Input klasöründeki resimleri bul
-        image_files = [f for f in os.listdir(INPUT_DIR) if os.path.splitext(f)[1] in image_extensions]
+        # Find images in the input folder
+        imageFiles = [f for f in os.listdir(INPUT_DIR) if os.path.splitext(f)[1] in imageExtensions]
 
-        if not image_files:
-            print("Input klasöründe resim bulunamadı!")
+        if not imageFiles:
+            print("No images found in the input folder!")
             return
 
-        print(f'Input klasöründe bulunan resimler: {image_files}')
+        print(f'Images found in the input folder: {imageFiles}')
 
-        # Kullanıcıdan arka plan rengi seçmesini iste
-        background_selection = get_background_color()
+        # Ask user to select background color
+        backgroundSelection = getBackgroundColor()
 
-        for img_file in image_files:
-            input_path = os.path.join(INPUT_DIR, img_file)
-            output_path = os.path.join(OUTPUT_DIR, os.path.splitext(img_file)[0] + '.png')
+        for imgFile in imageFiles:
+            inputPath = os.path.join(INPUT_DIR, imgFile)
+            outputPath = os.path.join(OUTPUT_DIR, os.path.splitext(imgFile)[0] + '.png')
             try:
-                input_image = Image.open(input_path)
-                output_image = remove(input_image)
+                inputImage = Image.open(inputPath)
+                outputImage = remove(inputImage)
                 
-                if 'gradient' in background_selection:
-                    # Gradient arka plan
-                    gradient_bg = create_gradient(output_image.size, background_selection['gradient'])
-                    if gradient_bg:
-                        # Gradient'i RGBA'ya çevir
-                        gradient_rgba = gradient_bg.convert('RGBA')
-                        # Resmi gradient üzerine yapıştır
-                        gradient_rgba.paste(output_image, mask=output_image.split()[3])
-                        gradient_rgba.convert('RGB').save(output_path)
-                        print(f'{img_file} -> {output_path} (gradient arka plan: {background_selection["name"]})')
-                elif 'color' not in background_selection or background_selection['color'] is None:
-                    # Şeffaf arka plan - PNG olarak kaydet
-                    output_image.save(output_path, 'PNG')
-                    print(f'{img_file} -> {output_path} (arka plan şeffaf)')
+                if 'gradient' in backgroundSelection:
+                    # Gradient background
+                    gradientBg = createGradient(outputImage.size, backgroundSelection['gradient'])
+                    if gradientBg:
+                        # Convert gradient to RGBA
+                        gradientRgba = gradientBg.convert('RGBA')
+                        # Paste image onto gradient
+                        gradientRgba.paste(outputImage, mask=outputImage.split()[3])
+                        gradientRgba.convert('RGB').save(outputPath)
+                        print(f'{imgFile} -> {outputPath} (gradient background: {backgroundSelection["name"]})')
+                elif 'color' not in backgroundSelection or backgroundSelection['color'] is None:
+                    # Transparent background - save as PNG
+                    outputImage.save(outputPath, 'PNG')
+                    print(f'{imgFile} -> {outputPath} (transparent background)')
                 else:
-                    # Düz renkli arka plan
-                    bg = Image.new('RGBA', output_image.size, (*background_selection['color'], 255))
-                    bg.paste(output_image, mask=output_image.split()[3])
-                    bg.convert('RGB').save(output_path)
-                    print(f'{img_file} -> {output_path} (arka plan {background_selection["name"].lower()}landı)')
+                    # Solid color background
+                    bg = Image.new('RGBA', outputImage.size, (*backgroundSelection['color'], 255))
+                    bg.paste(outputImage, mask=outputImage.split()[3])
+                    bg.convert('RGB').save(outputPath)
+                    print(f'{imgFile} -> {outputPath} (background {backgroundSelection["name"].lower()}d)')
                     
             except Exception as e:
-                print(f'Hata oluştu ({img_file}): {e}')
+                print(f'An error occurred ({imgFile}): {e}')
         
-        print("\nİşlem tamamlandı! Çıktı dosyaları 'output' klasöründe bulunabilir.")
+        print("\nOperation completed! Output files can be found in the 'output' folder.")
         
     except KeyboardInterrupt:
-        print("\nİşlem kullanıcı tarafından iptal edildi.")
+        print("\nOperation cancelled by user.")
     except Exception as e:
-        print(f"Beklenmeyen hata: {e}")
+        print(f"Unexpected error: {e}")
 
 if __name__ == "__main__":
     main() 
