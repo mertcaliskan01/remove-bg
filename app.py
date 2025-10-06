@@ -108,7 +108,7 @@ def uploadFile():
             return redirect(url_for('result', filename=outputFilename))
             
         except Exception as e:
-            flash(f'Bir hata oluştu: {str(e)}', 'error')
+            flash(f'An error occurred: {str(e)}', 'error')
             return redirect(url_for('index'))
     
     return redirect(url_for('index'))

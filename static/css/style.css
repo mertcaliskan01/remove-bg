@@ -20,32 +20,10 @@ body {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
 
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
 h1 {
+    text-align: center;
     margin-bottom: 20px;
     color: #2c3e50;
-}
-
-.lang-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.lang-btn:hover {
-    background-color: #2980b9;
 }
 
 .alert {

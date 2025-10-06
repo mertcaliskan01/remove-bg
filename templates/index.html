@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="page-title">Arka Plan Değiştirici</title>
+    <title>Background Changer</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -11,11 +11,8 @@
   </head>
   <body>
     <div class="container">
-      <div class="header">
-        <h1 id="main-title">Arka Plan Değiştirici</h1>
-        <button id="lang-btn" class="lang-btn">EN</button>
-      </div>
-      <p id="description">Resminizi yükleyin ve arka planını değiştirin!</p>
+      <h1>Background Changer</h1>
+      <p>Upload your image and change its background!</p>
 
       <!-- Flash messages -->
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
@@ -29,7 +26,7 @@
         <div class="upload-container">
           <label for="file" class="upload-label">
             <div class="upload-icon">📁</div>
-            <span id="select-image">Resim Seçin</span>
+            <span>Select Image</span>
           </label>
           <input
             type="file"
@@ -38,24 +35,15 @@
             accept=".jpg,.jpeg,.png"
             required
           />
-          <div
-            id="file-name"
-            class="file-name"
-            data-tr="Dosya seçilmedi"
-            data-en="No file selected"
-          >
-            Dosya seçilmedi
-          </div>
+          <div id="file-name" class="file-name">No file selected</div>
         </div>
 
         <div class="background-selection">
-          <h3 id="bg-title">Arka Plan Rengi Seçin</h3>
+          <h3>Select Background Color</h3>
 
           <!-- Custom Color Input -->
           <div class="custom-color-section">
-            <label for="custom-color" id="custom-label"
-              >Özel Renk (#05339C):</label
-            >
+            <label for="custom-color">Custom Color (#05339C):</label>
             <input
               type="color"
               id="custom-color"
@@ -79,7 +67,7 @@
                   class="color-preview"
                   style="background-color: #05339c"
                 ></div>
-                <span id="custom-text">Özel Renk</span>
+                <span>Custom Color</span>
               </label>
             </div>
 
@@ -108,82 +96,21 @@
         </div>
 
         <div class="output-settings">
-          <h3 id="output-title">Çıktı Ayarları</h3>
+          <h3>Output Settings</h3>
           <div class="output-options">
-            <label for="output-type" id="format-label">Dosya Formatı:</label>
+            <label for="output-type">File Format:</label>
             <select id="output-type" name="output-type">
-              <option value="png">PNG (Şeffaflık destekler)</option>
-              <option value="jpg">JPG (Daha küçük dosya)</option>
+              <option value="png">PNG (Supports transparency)</option>
+              <option value="jpg">JPG (Smaller file size)</option>
             </select>
           </div>
         </div>
 
-        <button type="submit" class="submit-btn" id="submit-btn">
-          Arka Planı Değiştir
-        </button>
+        <button type="submit" class="submit-btn">Change Background</button>
       </form>
     </div>
 
     <script>
-      // Language switching
-      const texts = {
-        tr: {
-          title: "Arka Plan Değiştirici",
-          description: "Resminizi yükleyin ve arka planını değiştirin!",
-          selectImage: "Resim Seçin",
-          noFile: "Dosya seçilmedi",
-          bgTitle: "Arka Plan Rengi Seçin",
-          customLabel: "Özel Renk (#05339C):",
-          customText: "Özel Renk",
-          outputTitle: "Çıktı Ayarları",
-          formatLabel: "Dosya Formatı:",
-          submitBtn: "Arka Planı Değiştir",
-        },
-        en: {
-          title: "Background Changer",
-          description: "Upload your image and change its background!",
-          selectImage: "Select Image",
-          noFile: "No file selected",
-          bgTitle: "Select Background Color",
-          customLabel: "Custom Color (#05339C):",
-          customText: "Custom Color",
-          outputTitle: "Output Settings",
-          formatLabel: "File Format:",
-          submitBtn: "Change Background",
-        },
-      };
-
-      let currentLang = "tr";
-      const langBtn = document.getElementById("lang-btn");
-
-      langBtn.addEventListener("click", function () {
-        currentLang = currentLang === "tr" ? "en" : "tr";
-        langBtn.textContent = currentLang === "tr" ? "EN" : "TR";
-        updateTexts();
-      });
-
-      function updateTexts() {
-        const t = texts[currentLang];
-        document.getElementById("page-title").textContent = t.title;
-        document.getElementById("main-title").textContent = t.title;
-        document.getElementById("description").textContent = t.description;
-        document.getElementById("select-image").textContent = t.selectImage;
-        document.getElementById("bg-title").textContent = t.bgTitle;
-        document.getElementById("custom-label").textContent = t.customLabel;
-        document.getElementById("custom-text").textContent = t.customText;
-        document.getElementById("output-title").textContent = t.outputTitle;
-        document.getElementById("format-label").textContent = t.formatLabel;
-        document.getElementById("submit-btn").textContent = t.submitBtn;
-
-        const fileNameEl = document.getElementById("file-name");
-        if (
-          fileNameEl.textContent === texts.tr.noFile ||
-          fileNameEl.textContent === texts.en.noFile
-        ) {
-          fileNameEl.textContent = t.noFile;
-        }
-      }
-
       // Custom color handling
       const customColorInput = document.getElementById("custom-color");
       const customPreview = document.getElementById("custom-preview");
@@ -203,8 +130,9 @@
 
       // File name display
       document.getElementById("file").addEventListener("change", function (e) {
-        const t = texts[currentLang];
-        var fileName = e.target.files[0] ? e.target.files[0].name : t.noFile;
+        var fileName = e.target.files[0]
+          ? e.target.files[0].name
+          : "No file selected";
         document.getElementById("file-name").textContent = fileName;
       });
     </script>
