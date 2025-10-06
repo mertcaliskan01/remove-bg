@@ -49,9 +49,8 @@ python3 bg_remover.py
 ## Requirements
 
 - Python 3.7+
+- Flask
 - Pillow (PIL)
-- rembg
-- onnxruntime
 
 ## Notes
 

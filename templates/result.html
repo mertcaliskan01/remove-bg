@@ -1,23 +1,75 @@
 <!DOCTYPE html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonuç - Arka Plan Kaldırıcı</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Sonuç - Arka Plan Değiştirici</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     <div class="container result-container">
-        <h1>İşlem Tamamlandı!</h1>
-        
-        <div class="result-image">
-            <img src="{{ url_for('output_file', filename=filename) }}" alt="İşlenmiş Resim">
-        </div>
-        
-        <div class="action-buttons">
-            <a href="{{ url_for('download', filename=filename) }}" class="download-btn">Resmi İndir</a>
-            <a href="{{ url_for('index') }}" class="back-btn">Yeni Resim Yükle</a>
-        </div>
+      <div class="header">
+        <h1 id="result-title">İşlem Tamamlandı!</h1>
+        <button id="lang-btn" class="lang-btn">EN</button>
+      </div>
+
+      <div class="result-image">
+        <img
+          src="{{ url_for('outputFile', filename=filename) }}"
+          alt="İşlenmiş Resim"
+          id="result-img"
+        />
+      </div>
+
+      <div class="action-buttons">
+        <a
+          href="{{ url_for('download', filename=filename) }}"
+          class="download-btn"
+          id="download-btn"
+          >Resmi İndir</a
+        >
+        <a href="{{ url_for('index') }}" class="back-btn" id="back-btn"
+          >Yeni Resim Yükle</a
+        >
+      </div>
     </div>
-</body>
+
+    <script>
+      // Language switching for result page
+      const texts = {
+        tr: {
+          title: "Sonuç - Arka Plan Değiştirici",
+          resultTitle: "İşlem Tamamlandı!",
+          downloadBtn: "Resmi İndir",
+          backBtn: "Yeni Resim Yükle",
+        },
+        en: {
+          title: "Result - Background Changer",
+          resultTitle: "Processing Complete!",
+          downloadBtn: "Download Image",
+          backBtn: "Upload New Image",
+        },
+      };
+
+      let currentLang = "tr";
+      const langBtn = document.getElementById("lang-btn");
+
+      langBtn.addEventListener("click", function () {
+        currentLang = currentLang === "tr" ? "en" : "tr";
+        langBtn.textContent = currentLang === "tr" ? "EN" : "TR";
+        updateTexts();
+      });
+
+      function updateTexts() {
+        const t = texts[currentLang];
+        document.getElementById("page-title").textContent = t.title;
+        document.getElementById("result-title").textContent = t.resultTitle;
+        document.getElementById("download-btn").textContent = t.downloadBtn;
+        document.getElementById("back-btn").textContent = t.backBtn;
+      }
+    </script>
+  </body>
 </html>

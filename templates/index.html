@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Arka Plan Kaldırıcı</title>
+    <title id="page-title">Arka Plan Değiştirici</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
@@ -11,14 +11,25 @@
   </head>
   <body>
     <div class="container">
-      <h1>Arka Plan Kaldırıcı</h1>
-      <p>Resminizi yükleyin ve arka planını kaldırın!</p>
+      <div class="header">
+        <h1 id="main-title">Arka Plan Değiştirici</h1>
+        <button id="lang-btn" class="lang-btn">EN</button>
+      </div>
+      <p id="description">Resminizi yükleyin ve arka planını değiştirin!</p>
+
+      <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" id="flash-message">
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %}
 
       <form action="/upload" method="post" enctype="multipart/form-data">
         <div class="upload-container">
           <label for="file" class="upload-label">
             <div class="upload-icon">📁</div>
-            <span>Resim Seçin</span>
+            <span id="select-image">Resim Seçin</span>
           </label>
           <input
             type="file"
@@ -27,12 +38,51 @@
             accept=".jpg,.jpeg,.png"
             required
           />
-          <div id="file-name" class="file-name">Dosya seçilmedi</div>
+          <div
+            id="file-name"
+            class="file-name"
+            data-tr="Dosya seçilmedi"
+            data-en="No file selected"
+          >
+            Dosya seçilmedi
+          </div>
         </div>
 
         <div class="background-selection">
-          <h3>Arka Plan Rengi Seçin</h3>
+          <h3 id="bg-title">Arka Plan Rengi Seçin</h3>
+
+          <!-- Custom Color Input -->
+          <div class="custom-color-section">
+            <label for="custom-color" id="custom-label"
+              >Özel Renk (#05339C):</label
+            >
+            <input
+              type="color"
+              id="custom-color"
+              name="custom-color"
+              value="#05339C"
+            />
+          </div>
+
           <div class="color-grid">
+            <!-- Custom Color Option -->
+            <div class="color-option">
+              <input
+                type="radio"
+                id="bg_custom"
+                name="background"
+                value="custom"
+              />
+              <label for="bg_custom" class="color-label">
+                <div
+                  id="custom-preview"
+                  class="color-preview"
+                  style="background-color: #05339c"
+                ></div>
+                <span id="custom-text">Özel Renk</span>
+              </label>
+            </div>
+
             {% for key, value in backgroundColors.items() %}
             <div class="color-option">
               <input type="radio" id="bg{{ key }}" name="background" value="{{
@@ -57,15 +107,104 @@
           </div>
         </div>
 
-        <button type="submit" class="submit-btn">Arka Planı Kaldır</button>
+        <div class="output-settings">
+          <h3 id="output-title">Çıktı Ayarları</h3>
+          <div class="output-options">
+            <label for="output-type" id="format-label">Dosya Formatı:</label>
+            <select id="output-type" name="output-type">
+              <option value="png">PNG (Şeffaflık destekler)</option>
+              <option value="jpg">JPG (Daha küçük dosya)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">
+          Arka Planı Değiştir
+        </button>
       </form>
     </div>
 
     <script>
+      // Language switching
+      const texts = {
+        tr: {
+          title: "Arka Plan Değiştirici",
+          description: "Resminizi yükleyin ve arka planını değiştirin!",
+          selectImage: "Resim Seçin",
+          noFile: "Dosya seçilmedi",
+          bgTitle: "Arka Plan Rengi Seçin",
+          customLabel: "Özel Renk (#05339C):",
+          customText: "Özel Renk",
+          outputTitle: "Çıktı Ayarları",
+          formatLabel: "Dosya Formatı:",
+          submitBtn: "Arka Planı Değiştir",
+        },
+        en: {
+          title: "Background Changer",
+          description: "Upload your image and change its background!",
+          selectImage: "Select Image",
+          noFile: "No file selected",
+          bgTitle: "Select Background Color",
+          customLabel: "Custom Color (#05339C):",
+          customText: "Custom Color",
+          outputTitle: "Output Settings",
+          formatLabel: "File Format:",
+          submitBtn: "Change Background",
+        },
+      };
+
+      let currentLang = "tr";
+      const langBtn = document.getElementById("lang-btn");
+
+      langBtn.addEventListener("click", function () {
+        currentLang = currentLang === "tr" ? "en" : "tr";
+        langBtn.textContent = currentLang === "tr" ? "EN" : "TR";
+        updateTexts();
+      });
+
+      function updateTexts() {
+        const t = texts[currentLang];
+        document.getElementById("page-title").textContent = t.title;
+        document.getElementById("main-title").textContent = t.title;
+        document.getElementById("description").textContent = t.description;
+        document.getElementById("select-image").textContent = t.selectImage;
+        document.getElementById("bg-title").textContent = t.bgTitle;
+        document.getElementById("custom-label").textContent = t.customLabel;
+        document.getElementById("custom-text").textContent = t.customText;
+        document.getElementById("output-title").textContent = t.outputTitle;
+        document.getElementById("format-label").textContent = t.formatLabel;
+        document.getElementById("submit-btn").textContent = t.submitBtn;
+
+        const fileNameEl = document.getElementById("file-name");
+        if (
+          fileNameEl.textContent === texts.tr.noFile ||
+          fileNameEl.textContent === texts.en.noFile
+        ) {
+          fileNameEl.textContent = t.noFile;
+        }
+      }
+
+      // Custom color handling
+      const customColorInput = document.getElementById("custom-color");
+      const customPreview = document.getElementById("custom-preview");
+      const customRadio = document.getElementById("bg_custom");
+
+      customColorInput.addEventListener("change", function () {
+        customPreview.style.backgroundColor = this.value;
+        // Don't change radio value, keep it as 'custom'
+      });
+
+      customRadio.addEventListener("change", function () {
+        if (this.checked) {
+          // Keep radio value as 'custom', don't change it
+          customPreview.style.backgroundColor = customColorInput.value;
+        }
+      });
+
+      // File name display
       document.getElementById("file").addEventListener("change", function (e) {
-        var fileName = e.target.files[0]
-          ? e.target.files[0].name
-          : "Dosya seçilmedi";
+        const t = texts[currentLang];
+        var fileName = e.target.files[0] ? e.target.files[0].name : t.noFile;
         document.getElementById("file-name").textContent = fileName;
       });
     </script>
